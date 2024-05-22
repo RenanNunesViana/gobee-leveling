@@ -1,0 +1,189 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    font-size: 24px;
+    color: white;
+
+}
+
+body {
+    overflow: hidden;
+    background-color: black;
+
+}
+
+p {
+    margin: 5px 0;
+    font-size: 2rem;
+    line-height: 1rem;
+}
+
+video {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+}
+
+/* header style */
+
+ul {
+    display: flex;
+    align-items: center;
+    margin-left: 5%;
+}
+
+header li+li {
+    margin-left: 40px;
+}
+
+header li {
+    cursor: pointer;
+}
+
+header {
+    height: 90px;
+    width: 100%;
+    background-color: rgb(41, 27, 100);
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    z-index: 2;
+}
+
+.right-side {
+    width: 30%;
+    position: relative;
+}
+
+.right-side img {
+    position: absolute;
+}
+
+.play-pause-btn {
+    width: 30px;
+    right: 180px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.play-pause-btn:hover {
+    width: 40px;
+    right: 175px;
+}
+
+header img:last-child {
+    width: 90px;
+    height: auto;
+    right: 0;
+
+}
+
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    width: 100%;
+}
+
+footer ul {
+    display: flex;
+    margin-left: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+footer li+li {
+    margin-left: 10px;
+}
+
+svg {
+    width: 2vw;
+}
+
+.socialMidia {
+    margin-right: 3rem;
+}
+
+.container {
+    margin-bottom: 20px;
+}
+
+path {
+    fill: white;
+}
+
+/* tablets responsivity */
+@media (max-width: 768px) {
+    header a {
+        font-size: 0.8rem;
+    }
+
+    header li+li {
+        margin-left: 2vw;
+    }
+
+    .play-pause-btn {
+        width: 20px;
+        right: 100px;
+    }
+
+    .play-pause-btn:hover {
+        width: 20px;
+        right: 100px;
+    }
+
+    footer {
+        height: 40px;
+    }
+
+    footer svg {
+        width: 30px;
+    }
+
+}
+
+/* smartphones responsivity */
+@media (max-width: 480px) {
+    header {
+        height: 60px;
+    }
+
+    header li+li {
+        margin-left: 1vw;
+    }
+
+    header a {
+        font-size: 0.5rem;
+    }
+
+    .play-pause-btn {
+        width: 5vw;
+        right: 70px;
+    }
+
+    .play-pause-btn:hover {
+        width: 5vw;
+        right: 70px;
+    }
+
+    header img:last-child {
+        width: 60px;
+        height: auto;
+        right: 0;
+
+    }
+
+    footer {
+        height: 40px;
+    }
+
+}

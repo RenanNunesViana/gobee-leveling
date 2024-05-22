@@ -1,0 +1,84 @@
+body {
+    overflow-y: auto;
+}
+
+video {
+    height: 100vh;
+    width: 100%;
+}
+
+.left-content-box {
+    position: absolute;
+    top: 20%;
+    left: 5%;
+    width: 40%;
+    height: 60%;
+    overflow-y: scroll;
+
+}
+
+.left-content-box>p {
+    font-size: 1rem;
+    text-indent: 3rem;
+    margin-bottom: 2rem;
+}
+
+#galery-ancor-arrow {
+    display: flex;
+    gap: 2vw;
+}
+
+#galery-ancor-arrow>a {
+    width: 50px;
+}
+
+span {
+    display: block;
+    color: aqua;
+}
+
+#galery {
+    background-image: url('./../imgs/sky.jpg');
+    background-size: cover;
+    width: 100%;
+    height: auto;
+}
+
+
+#content {
+    padding: 80px 0;
+    margin: 0 auto;
+    max-width: 800px;
+    display: grid;
+    gap: 10vw;
+    grid-template-columns: 1fr 1fr;
+}
+
+#content img {
+    max-width: 250px;
+    min-width: 180px;
+    width: 25vw;
+    height: auto;
+}
+
+#content p {
+    font-size: 1rem;
+}
+
+/* tablets responsivity */
+@media (max-width: 768px) {
+    .left-content-box p {
+        font-size: 0.8rem;
+    }
+
+    #content p {
+        font-size: 1rem;
+    }
+}
+
+/* smartphones responsivity */
+@media (max-width: 480px) {
+    body {
+        width: 125vw;
+    }
+}

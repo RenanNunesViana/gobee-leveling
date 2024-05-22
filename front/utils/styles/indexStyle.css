@@ -1,0 +1,152 @@
+.presentation-box {
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 70vh;
+    width: 80vw;
+    z-index: 1;
+    position: absolute;
+    top: 20vh;
+    left: 10vw;
+    text-align: center;
+    border-radius: 15px;
+    animation: comming-from-left 2s linear 0s 1;
+}
+
+
+.title-presentation {
+    margin-top: 3rem;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    display: inline-block;
+    width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 6rem;
+    animation:
+        showing-txt 4s steps(20) 2s forwards,
+        typing-txt 500ms normal infinite,
+        fadeOut 2s normal 7s forwards;
+}
+
+#text-presentation {
+    line-height: 1.4rem;
+    margin: 3rem;
+    text-align: justify;
+    text-indent: 3rem;
+    animation-delay: 7s;
+    margin-top: 30px;
+}
+
+#text-presentation span {
+    opacity: 0;
+    animation: randomFadeIn 2s ease-out forwards;
+}
+
+@keyframes typing-txt {
+    from {
+        border-right: 2px solid white;
+    }
+
+    to {
+        border-right: 2px solid transparent;
+    }
+}
+
+@keyframes showing-txt {
+    from {
+        width: 0;
+        opacity: 1;
+    }
+
+    to {
+        width: 28.6rem;
+    }
+}
+
+@keyframes showing-txt-tablet {
+    from {
+        width: 0;
+        opacity: 1;
+    }
+
+    to {
+        width: 14.3rem;
+    }
+}
+
+@keyframes showing-txt-smartphone {
+    from {
+        width: 0;
+        opacity: 1;
+    }
+
+    to {
+        width: 9.6rem;
+    }
+}
+
+@keyframes comming-from-left {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 80vw;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes randomFadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* tablets responsivity */
+@media (max-width: 880px) {
+    .title-presentation {
+        font-size: 3rem;
+        animation: showing-txt-tablet 4s steps(15) 2s forwards,
+            typing-txt 500ms normal infinite,
+            fadeOut 2s normal 7s forwards;
+        left: 10%;
+    }
+
+    #text-presentation {
+        margin: 1rem
+    }
+
+    #text-presentation span {
+        font-size: 0.7rem;
+        line-height: 0.3rem;
+    }
+}
+
+/* smartphones responsivity */
+@media (max-width: 480px) {
+    .presentation-box {
+        height: 85vh;
+        top: 10vh
+    }
+
+    .title-presentation {
+        font-size: 2rem;
+        animation: showing-txt-smartphone 4s steps(15) 2s forwards,
+            typing-txt 500ms normal infinite,
+            fadeOut 2s normal 7s forwards;
+        left: 15%;
+    }
+
+    #text-presentation {
+        margin-top: 0;
+    }
+}

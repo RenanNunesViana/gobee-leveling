@@ -1,0 +1,128 @@
+.presentation-box {
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 70vh;
+    width: 80vw;
+    z-index: 1;
+    position: absolute;
+    top: 20vh;
+    left: 10vw;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.container {
+    text-align: center;
+    height: 50%;
+    margin: 0;
+}
+
+p,
+#first-list,
+#second-list {
+    opacity: 0;
+    position: absolute;
+}
+
+p {
+    line-height: 2rem;
+    font-size: 1.5rem;
+}
+
+#first-paragraph {
+    top: 30%;
+    transform: translateY(-50%);
+    animation: fadeInOut 15s forwards;
+}
+
+#first-list {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: fadeInOutRemains 3s forwards 13s;
+}
+
+#second-paragraph {
+    top: 25%;
+    animation: fadeInOut 27s forwards 20s;
+}
+
+#second-list {
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    animation: fadeInOutRemains 3s forwards 42s
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        scale: 0.1;
+    }
+
+    25% {
+        opacity: 1;
+        scale: 1;
+    }
+
+    75% {
+        opacity: 1;
+        scale: 1;
+    }
+
+    100% {
+        opacity: 0;
+        scale: 0;
+    }
+}
+
+@keyframes fadeInOutRemains {
+    0% {
+        opacity: 0;
+        scale: 0.1;
+    }
+
+    100% {
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+/* tablets responsivity */
+@media (max-width: 768px) {
+    .container p {
+        font-size: 0.8rem;
+        line-height: 2rem;
+    }
+
+    .container li {
+        line-height: 1.5rem;
+        font-size: 0.8rem;
+    }
+
+    #second-paragraph {
+        top: 30%
+    }
+
+    #second-list {
+        top: 10%
+    }
+
+    ol {
+        width: 80%;
+    }
+}
+
+/* smartphones responsivity */
+@media (max-width: 480px) {
+    .container p {
+        line-height: 1rem;
+    }
+
+    #second-paragraph {
+        top: 45%;
+    }
+
+    #second-list li {
+        font-size: 0.7rem;
+    }
+}

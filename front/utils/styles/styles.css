@@ -1,0 +1,99 @@
+#content4>div>p {
+  line-height: 1.8rem;
+  margin-top: 1rem;
+}
+
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* animation socialMidiaContact img */
+@keyframes call-to-action {
+  0% {
+    left: -2rem;
+    bottom: -2rem;
+  }
+
+  50% {
+    left: -3rem;
+    bottom: -3rem;
+  }
+
+  100% {
+    left: -2rem;
+    bottom: -2rem;
+  }
+}
+
+/* animations presentation box */
+@keyframes typing-txt {
+  from {
+    border-right: 2px solid white;
+  }
+
+  to {
+    border-right: 2px solid transparent;
+  }
+}
+
+@keyframes showing-txt {
+  from {
+    width: 0;
+    opacity: 1;
+  }
+
+  to {
+    width: 28.6rem;
+  }
+}
+
+@keyframes comming-from-left {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 80vw;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes randomFadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes growIn {
+  0% {
+    transform: scale(0.2);
+    /* Começa invisível */
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    /* Cresce para um tamanho visível */
+    opacity: 1;
+  }
+}
