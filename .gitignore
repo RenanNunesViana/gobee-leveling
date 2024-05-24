@@ -1,0 +1,51 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build Results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# Roslyn Cache
+*.ide
+
+# Rider
+.idea/
+
+# Legacy
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Files built by Visual Studio
+*.appx
+*.appxbundle
+*.appxsym
+*.appxupload
+
+# User-specific files
+*.rsuser
+*.pdb
+*.opendb
+*.pyc
+*.pyo
+*.dll
+
+# Local History for JetBrains products
+.localhistory/
+
+# Temporary files
+*.tmp
+*.temp
