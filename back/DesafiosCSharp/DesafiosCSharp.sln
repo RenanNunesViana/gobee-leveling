@@ -5,7 +5,9 @@ VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Piramide", "Nivelamento\Piramide.csproj", "{82FC0A3B-D16C-45E0-B282-A1365ED1C977}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vertice", "Vertice\Vertice.csproj", "{A44324D8-6351-4F83-B189-CED0DD084C3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vertice", "Vertice\Vertice.csproj", "{A44324D8-6351-4F83-B189-CED0DD084C3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Triangulo", "Triangulo\Triangulo.csproj", "{0BF0A335-8ED1-4AB7-9864-7B4A88E207D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{A44324D8-6351-4F83-B189-CED0DD084C3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A44324D8-6351-4F83-B189-CED0DD084C3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A44324D8-6351-4F83-B189-CED0DD084C3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BF0A335-8ED1-4AB7-9864-7B4A88E207D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BF0A335-8ED1-4AB7-9864-7B4A88E207D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BF0A335-8ED1-4AB7-9864-7B4A88E207D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BF0A335-8ED1-4AB7-9864-7B4A88E207D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
