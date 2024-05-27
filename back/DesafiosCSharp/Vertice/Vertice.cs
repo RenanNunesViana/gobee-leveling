@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vertice
+namespace VerticeLibrary
 {
-    internal class Vertice(float X, float Y)
+    public class Vertice(float X, float Y)
     {
         public float X { get; private set; } = X;
         public float Y { get; private set; } = Y;

@@ -1,4 +1,4 @@
-﻿namespace Vertice
+﻿namespace VerticeLibrary
 {
     internal class Program
     {
