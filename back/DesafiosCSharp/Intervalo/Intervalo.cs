@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IntervaloLibrary
 {
-    internal class Intervalo
+    public class Intervalo
     {
         public DateTime DataHoraInicial { get; }
         public DateTime DataHoraFinal { get; }
