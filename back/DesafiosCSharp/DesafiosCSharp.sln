@@ -20,6 +20,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ListaIntervalo", "ListaInte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Armstrong", "ExtensaoInteiros\Armstrong.csproj", "{20674DEF-EDAF-4873-85B0-2E6F3C75F74C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidacaoDados", "ValidacaoDados\ValidacaoDados.csproj", "{C943D6BA-6B8B-4E0B-AECD-C30A2AEBE676}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,10 @@ Global
 		{20674DEF-EDAF-4873-85B0-2E6F3C75F74C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20674DEF-EDAF-4873-85B0-2E6F3C75F74C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20674DEF-EDAF-4873-85B0-2E6F3C75F74C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C943D6BA-6B8B-4E0B-AECD-C30A2AEBE676}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C943D6BA-6B8B-4E0B-AECD-C30A2AEBE676}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C943D6BA-6B8B-4E0B-AECD-C30A2AEBE676}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C943D6BA-6B8B-4E0B-AECD-C30A2AEBE676}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
