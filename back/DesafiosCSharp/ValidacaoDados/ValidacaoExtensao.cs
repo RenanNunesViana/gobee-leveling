@@ -14,7 +14,7 @@ namespace ValidacaoDados
             while (true)
             {
                 Console.Write("Digite o nome (pelo menos 5 caracteres): ");
-                string nome = Console.ReadLine();
+                string? nome = Console.ReadLine();
                 if (nome.Length >= 5)
                     return nome;
                 Console.WriteLine("Erro: Nome deve ter pelo menos 5 caracteres.");
@@ -26,7 +26,7 @@ namespace ValidacaoDados
             while (true)
             {
                 Console.Write("Digite o CPF (11 dígitos): ");
-                string cpfInput = Console.ReadLine();
+                string? cpfInput = Console.ReadLine();
                 if (cpfInput.Length == 11 && long.TryParse(cpfInput, out long cpf))
                     return cpf;
                 Console.WriteLine("Erro: CPF deve ter exatamente 11 dígitos numéricos.");
@@ -38,7 +38,7 @@ namespace ValidacaoDados
             while (true)
             {
                 Console.Write("Digite a data de nascimento (Dia/Mes/Ano): ");
-                string dataInput = Console.ReadLine();
+                string? dataInput = Console.ReadLine();
                 if (DateTime.TryParseExact(dataInput, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dataNascimento) &&
                     dataNascimento <= DateTime.Now.AddYears(-18))
                     return dataNascimento;
