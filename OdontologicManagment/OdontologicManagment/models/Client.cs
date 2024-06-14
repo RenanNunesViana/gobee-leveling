@@ -9,25 +9,31 @@ namespace OdontologicManagment.models
     {
         [Key]
         public int Id { get; init; }
+        
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
+        
         [Required]
-        [StringLength(14)]
+        [StringLength(11)]
         public string Cpf { get; init; }
-        //auterar para outro tipo
+        
         [Required]
         [StringLength(10)]
         public DateTime BirthDate { get; set; }
 
-        public Client(String name, String cpf, String birthDate) {
+        [InverseProperty("Cliente")]
+        public ICollection<Consulta> Consultas { get; set; }
+
+        public Client(String name, String cpf, String birthDate)
+        {
 
             if (!ValidarCPF(cpf))
             {
                 throw new ArgumentException("Cpf deve ser válido");
             }
 
-            if(name.Length < 5)
+            if (name.Length < 5)
             {
                 throw new ArgumentException("O nome do cliente deve ter pelo menos 5 caracteres");
             }
@@ -37,9 +43,16 @@ namespace OdontologicManagment.models
                 throw new ArgumentException("Data de nascimento inválida. Use o formato DDMMAAAA.");
             }
 
+            var age = CalcularIdade(parsedDate);
+            if (age < 13)
+            {
+                throw new ArgumentException("O cliente deve ter pelo menos 13 anos.");
+            }
+
             this.Name = name;
             this.Cpf = cpf;
             this.BirthDate = parsedDate;
+            this.Consultas = [];
         }
 
         // Construtor privado para uso pelo EF Core
@@ -48,6 +61,15 @@ namespace OdontologicManagment.models
             this.Name = name;
             this.Cpf = cpf;
             this.BirthDate = birthDate;
+            this.Consultas = [];
+        }
+
+        public static int CalcularIdade(DateTime birthDate)
+        {
+            var hoje = DateTime.Today;
+            var idade = hoje.Year - birthDate.Year;
+            if (birthDate.Date > hoje.AddYears(-idade)) idade--;
+            return idade;
         }
 
         //retorna true se for um cpf válido
@@ -79,6 +101,17 @@ namespace OdontologicManagment.models
                 return false;
             }
             return true;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Client client &&
+                   Cpf == client.Cpf;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Cpf);
         }
     }
 }

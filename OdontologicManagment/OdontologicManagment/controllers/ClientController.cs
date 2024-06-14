@@ -1,54 +1,34 @@
 ﻿using OdontologicManagment.models;
-using OdontologicManagment.repository;
+using OdontologicManagment.repositories;
+using OdontologicManagment.services;
 
 namespace OdontologicManagment.controllers
 {
     public class ClientController
     {
-        private readonly ClientRepo _repo;
 
-        public ClientController()
+        private readonly ClientService clientService;
+
+        public ClientController(ApplicationDbContext context)
         {
-            _repo = new ClientRepo();
-            InicializaBD.Initialize(_repo);
-        }
-
-
-        public void ResgatarCliente(int id)
-        {
-            Client? client = _repo.Clients.Find(id);
-            if (client != null)
-            {
-                //TODO exibição do cliente
-            }
-            else
-            {
-                Console.WriteLine($"Cliente com id {id} não encontrado.");
-            }
+            clientService = new ClientService(context);
         }
 
         public void AddClient(Client client)
         {
-
-            if (_repo.Clients.Find(client.Id) == null)
+            try
             {
-                LancaExcecaoCpfExistente(client.Cpf);
-                _repo.Clients.Add(client);
-                _repo.SaveChanges();
-                Console.WriteLine("Cliente adicionado com sucesso.");
+                clientService.AddClient(client);
             }
-            else
+            catch (Exception ex)
             {
-                throw new Exception("Cliente com este ID já existe!");
+                Console.WriteLine(ex);
             }
         }
 
-        private void LancaExcecaoCpfExistente(String cpf)
+        public void recuperaClientById(int id)
         {
-            foreach (var client in _repo.Clients)
-            {
-                if (client.Cpf == cpf) throw new ArgumentException("Cliente com este cpf já consta no sistema");
-            }
+            return;
         }
     }
 }

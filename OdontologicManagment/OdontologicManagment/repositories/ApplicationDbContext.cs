@@ -1,12 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OdontologicManagment.models;
-using MySql.Data.MySqlClient;
 
-namespace OdontologicManagment.repository
+namespace OdontologicManagment.repositories
 {
-    public class ClientRepo : DbContext
+    public class ApplicationDbContext : DbContext
     {
         public DbSet<Client> Clients { get; set; }
+        public DbSet<Consulta> Consultas { get; set; }
+
+        public ApplicationDbContext()
+        {
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -16,8 +20,5 @@ namespace OdontologicManagment.repository
                 optionsBuilder.UseMySql(conectionString, ServerVersion.AutoDetect(conectionString));
             }
         }
-
     }
-
 }
-

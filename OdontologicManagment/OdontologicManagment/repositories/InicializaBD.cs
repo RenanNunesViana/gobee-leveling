@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 
 namespace OdontologicManagment.repository
 {
+    // deprecated/broked
     public static class InicializaBD
     {
-        public static void Initialize(ClientRepo context)
+        public static void Initialize(this ClientRepo repo)
         {
-            context.Database.EnsureCreated();
+            repo._context.Database.EnsureDeleted();
+            repo.Database.EnsureCreated();
             // Procura por clientes
-            if (context.Clients.Any())
+            if (repo.Clients.Any())
             {
                 return;   //O BD foi alimentado
             }
@@ -24,9 +26,9 @@ namespace OdontologicManagment.repository
             };
             foreach (Client c in clients)
             {
-                context.Clients.Add(c);
+                repo.Clients.Add(c);
             }
-            context.SaveChanges();
+            repo.SaveChanges();
         }
     }
 }
