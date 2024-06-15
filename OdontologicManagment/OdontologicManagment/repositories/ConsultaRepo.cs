@@ -1,4 +1,5 @@
 ﻿using OdontologicManagment.models;
+using System.Globalization;
 
 namespace OdontologicManagment.repositories
 {
@@ -37,6 +38,26 @@ namespace OdontologicManagment.repositories
         public List<Consulta> FindAll()
         {
             return [.. _context.Consultas];
+        }
+
+        public Consulta FindByCpfAndDateAndTime(String cpf, DateTime data, TimeSpan horaInicio)
+        {
+            var consulta = _context.Consultas.FirstOrDefault(c =>
+                c.Cliente.Cpf == cpf &&
+                c.DataConsulta == data &&
+                c.HoraInicial == horaInicio) ?? throw new Exception("consulta não encontrada!");
+            return consulta;
+        }
+
+        public bool DeleteConsulta(Consulta consulta)
+        {
+            if(_context.Consultas.Find(consulta) != null)
+            {
+                _context.Consultas.Remove(consulta);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
         }
 
     }

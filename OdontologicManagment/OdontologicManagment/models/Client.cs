@@ -12,7 +12,7 @@ namespace OdontologicManagment.models
         
         [Required]
         [StringLength(50)]
-        public string Name { get; set; }
+        public string Name { get; init; }
         
         [Required]
         [StringLength(11)]
@@ -20,10 +20,10 @@ namespace OdontologicManagment.models
         
         [Required]
         [StringLength(10)]
-        public DateTime BirthDate { get; set; }
+        public DateTime BirthDate { get; init; }
 
         [InverseProperty("Cliente")]
-        public ICollection<Consulta> Consultas { get; set; }
+        public ICollection<Consulta> Consultas { get; init; }
 
         public Client(String name, String cpf, String birthDate)
         {
@@ -62,6 +62,30 @@ namespace OdontologicManagment.models
             this.Cpf = cpf;
             this.BirthDate = birthDate;
             this.Consultas = [];
+        }
+
+        public int CalcularIdade()
+        {
+            var hoje = DateTime.Today;
+            var idade = hoje.Year - BirthDate.Year;
+            if (BirthDate.Date > hoje.AddYears(-idade)) idade--;
+            return idade;
+        }
+
+        public void AddConsulta(Consulta consulta)
+        {
+            Consultas.Add(consulta);
+        }
+
+        public List<Consulta> RetornaConsultasFuturas()
+        {
+            var consultasFuturas = Consultas.Where(
+                c => c.DataConsulta > DateTime.Now.Date
+                    ||
+                    (c.DataConsulta == DateTime.Now.Date && c.HoraInicial > DateTime.Now.TimeOfDay)
+                ).ToList();
+
+            return consultasFuturas;
         }
 
         public static int CalcularIdade(DateTime birthDate)

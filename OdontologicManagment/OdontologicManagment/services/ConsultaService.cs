@@ -1,11 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using OdontologicManagment.models;
+﻿using OdontologicManagment.models;
 using OdontologicManagment.repositories;
 using OdontologicManagment.repository;
+using System.Globalization;
 
 namespace OdontologicManagment.services
 {
-    internal class ConsultaService
+    public class ConsultaService
     {
         private ConsultaRepo _consultaRepo;
         private ClientRepo _clientRepo;
@@ -14,7 +14,7 @@ namespace OdontologicManagment.services
             _clientRepo = new ClientRepo(context);
         }
 
-        public Consulta agendarConsulta(String cpf, String dia, String inicio, String termino)
+        public Consulta AgendarConsulta(String cpf, String dia, String inicio, String termino)
         {
 
             Client client = _clientRepo.FindByCpf(cpf) ?? throw new ArgumentException("Cliente com este cpf não registrado");
@@ -25,6 +25,41 @@ namespace OdontologicManagment.services
                 throw new ArgumentException("Já existe uma consulta agendada neste período.");
             }
             return _consultaRepo.Save(consulta);
+        }
+
+        public List<Consulta> FindByCpfConsultasFuturas(String cpf)
+        {
+            List<Consulta> consultas = _consultaRepo.FindByCpf(cpf);
+            var consultasFuturas = consultas.Where(
+                c => c.DataConsulta > DateTime.Now.Date
+                    ||
+                    (c.DataConsulta == DateTime.Now.Date && c.HoraInicial > DateTime.Now.TimeOfDay)
+                ).ToList();
+
+            return consultasFuturas;
+        }
+
+        public bool CancelarConsulta(string cpf, string dataConsulta, string horaInicial)
+        {
+            if (!DateTime.TryParseExact(dataConsulta, "ddMMyyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDataConsulta))
+            {
+                throw new ArgumentException("Data de consulta inválida. Use o formato DDMMAAAA.");
+            }
+
+            if (!TimeSpan.TryParseExact(horaInicial, "hhmm", CultureInfo.InvariantCulture, out var parsedHoraInicial))
+            {
+                throw new ArgumentException("Hora inicial inválida. Use o formato HHMM.");
+            }
+
+            var consulta = _consultaRepo.FindByCpfAndDateAndTime(cpf, parsedDataConsulta, parsedHoraInicial);
+
+            var now = DateTime.Now;
+            if (consulta.DataConsulta < now.Date || (consulta.DataConsulta == now.Date && consulta.HoraInicial <= now.TimeOfDay))
+            {
+                throw new ArgumentException("O cancelamento só pode ser realizado para agendamentos futuros.");
+            }
+
+            return _consultaRepo.DeleteConsulta(consulta);
         }
 
         private bool IsSobreposta(Consulta consulta)
