@@ -26,13 +26,15 @@ namespace OdontologicManagment.controllers
         {
             try
             {
-                RegistrarCliente.run(out string? cpf, out string? nome, out string? birthDate);
-                clientService.AddClient(new(nome, cpf, birthDate));
+                RegistrarCliente.Run(out string? cpf, out string? nome, out string? birthDate);
+                var dataNascimentoFormatada = birthDate?.Replace("/", "");
+                Console.WriteLine(dataNascimentoFormatada);
+                clientService.AddClient(new(nome, cpf, dataNascimentoFormatada));
                 Console.WriteLine("Paciente cadastrado com sucesso!");
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -43,7 +45,9 @@ namespace OdontologicManagment.controllers
                 Console.WriteLine("CPF: ");
                 var cpf = Console.ReadLine();
                 clientService.RmvClientByCpf(cpf);
-            }catch (Exception ex) {Console.WriteLine(ex.Message);}
+                Console.WriteLine("Paciente excluído com sucesso!");
+            }
+            catch (Exception ex) {Console.WriteLine(ex.Message);}
         }
 
         public void recuperaClientById(int id)

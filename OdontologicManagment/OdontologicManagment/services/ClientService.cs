@@ -13,7 +13,7 @@ namespace OdontologicManagment.services
         public ClientService(ApplicationDbContext context)
         {
             _clientRepo = new ClientRepo(context);
-            //_repo.Initialize();
+            _consultaRepo = new ConsultaRepo(context);
         }
 
 
@@ -37,7 +37,7 @@ namespace OdontologicManagment.services
             {
                 return client;
             }
-            else { throw new Exception($"Cliente com cpf {cpf} não encontrado!"); }
+            else { throw new Exception($"Erro: paciente não cadastrado"); }
         }
 
         public void AddClient(Client client)
@@ -68,10 +68,10 @@ namespace OdontologicManagment.services
                 }
                 else
                 {
-                    throw new Exception("Cansele as consultas futuras referente ao cliente para exclui-lo");
+                    throw new Exception("Erro: paciente está agendado.");
                 }
             }
-            throw new Exception($"Cliente com CPF {cpf} inexistente");
+            throw new Exception($"Erro: paciente não cadastrado");
         }
 
         public List<Consulta> FindByCpfConsultasFuturas(String cpf)
@@ -101,7 +101,7 @@ namespace OdontologicManagment.services
         {
             
             if (_clientRepo.ClientExists(cpf)) 
-                throw new ArgumentException("Cliente com este cpf já consta no sistema");
+                throw new ArgumentException("Erro: CPF já cadastrado");
             
         }
     }

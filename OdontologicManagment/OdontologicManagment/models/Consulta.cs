@@ -52,7 +52,7 @@ namespace OdontologicManagment.models
                 throw new ArgumentException("Horas devem estar em intervalos de 15 minutos.");
             }
 
-            if(IsTempoValido(parsedHoraInicial, parsedHoraFinal))
+            if(!IsTempoValido(parsedHoraInicial, parsedHoraFinal))
             {
                 throw new ArgumentException("Horário de agendamento fora do horário de funcionamento (08:00 - 19:00).");
             }

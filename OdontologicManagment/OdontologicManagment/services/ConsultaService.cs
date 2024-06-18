@@ -17,12 +17,12 @@ namespace OdontologicManagment.services
         public Consulta AgendarConsulta(String cpf, String dia, String inicio, String termino)
         {
 
-            Client client = _clientRepo.FindByCpf(cpf) ?? throw new ArgumentException("Cliente com este cpf não registrado");
+            Client client = _clientRepo.FindByCpf(cpf) ?? throw new ArgumentException("Erro: paciente não cadastrado");
             Consulta consulta = new(client, dia, inicio, termino);
 
             if (IsSobreposta(consulta))
             {
-                throw new ArgumentException("Já existe uma consulta agendada neste período.");
+                throw new ArgumentException("Erro: já existe uma consulta agendada nesse horário");
             }
             return _consultaRepo.Save(consulta);
         }
@@ -61,7 +61,7 @@ namespace OdontologicManagment.services
                 throw new ArgumentException("Hora inicial inválida. Use o formato HHMM.");
             }
 
-            var consulta = _consultaRepo.FindByCpfAndDateAndTime(cpf, parsedDataConsulta, parsedHoraInicial);
+            var consulta = _consultaRepo.FindByCpfAndDateAndTime(cpf, parsedDataConsulta, parsedHoraInicial) ?? throw new Exception("Erro: agendamento não encontrado");
 
             var now = DateTime.Now;
             if (consulta.DataConsulta < now.Date || (consulta.DataConsulta == now.Date && consulta.HoraInicial <= now.TimeOfDay))

@@ -35,7 +35,7 @@ namespace OdontologicManagment.models
 
             if (name.Length < 5)
             {
-                throw new ArgumentException("O nome do cliente deve ter pelo menos 5 caracteres");
+                throw new ArgumentException("O nome do paciente deve ter pelo menos 5 caracteres");
             }
 
             if (!DateTime.TryParseExact(birthDate, "ddMMyyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDate))
@@ -46,7 +46,7 @@ namespace OdontologicManagment.models
             var age = CalcularIdade(parsedDate);
             if (age < 13)
             {
-                throw new ArgumentException("O cliente deve ter pelo menos 13 anos.");
+                throw new ArgumentException("Erro: paciente deve ter pelo menos 13 anos.");
             }
 
             this.Name = name;

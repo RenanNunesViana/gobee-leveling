@@ -57,7 +57,8 @@ namespace OdontologicManagment.controllers
             try
             {
                 RegistrarConsulta.Run(out string? cpf, out string? data, out string? inicio, out string? termino);
-                consultaService.AgendarConsulta(cpf, data, inicio, termino);
+                var dataFormatada = data.Replace("/", "");
+                consultaService.AgendarConsulta(cpf, dataFormatada, inicio, termino);
                 Console.WriteLine("Agendamento realizado com sucesso!");
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }

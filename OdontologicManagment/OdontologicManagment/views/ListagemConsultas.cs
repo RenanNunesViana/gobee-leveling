@@ -16,21 +16,22 @@ namespace OdontologicManagment.views
 
             do
             {
-                Console.WriteLine($"Apresentar a agenda T-Toda ou P-Periodo: {opcao = Console.ReadKey().ToString()}");
+                Console.WriteLine("Apresentar a agenda T-Toda ou P-Periodo: ");
+                opcao = Console.ReadLine()?.ToUpper();
 
                 switch (opcao)
                 {
                     case "P":
-                        String? dataInicial;
-                        Console.WriteLine($"Data Inicial: {dataInicial = Console.ReadLine()}");
+                        Console.WriteLine("Data Inicial: ");
+                        String? dataInicial = Console.ReadLine();
                         if (dataInicial == null)
                         {
                             Console.WriteLine("Por favor ensira uma data no formato dd/MM/yyyy");
                             break;
                         }
 
-                        String? dataFinal;
-                        Console.WriteLine($"Data Final: {dataFinal = Console.ReadLine()}");
+                        Console.WriteLine("Data Final: ");
+                        String? dataFinal = Console.ReadLine();
                         if (dataFinal == null)
                         {
                             Console.WriteLine("Por favor ensira uma data no formato dd/MM/yyyy");
@@ -72,7 +73,7 @@ namespace OdontologicManagment.views
                 throw new Exception($"Utilize a data no formato dd/MM/yyyy");
             }
 
-                if(DateTime.TryParseExact(dataFinal, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDataFinal))
+                if(!DateTime.TryParseExact(dataFinal, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDataFinal))
             {
                 throw new Exception($"Utilize a data no formato dd/MM/yyyy");
             }

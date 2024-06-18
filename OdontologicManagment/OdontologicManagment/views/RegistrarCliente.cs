@@ -2,7 +2,7 @@
 {
     internal class RegistrarCliente
     {
-        public static void run(out String? cpf, out String? nome, out String? birthDate)
+        public static void Run(out String? cpf, out String? nome, out String? birthDate)
         {
             Console.WriteLine("CPF: ");
             cpf = Console.ReadLine();

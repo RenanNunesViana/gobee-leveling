@@ -49,12 +49,12 @@ namespace OdontologicManagment.repositories
             return [.. _context.Consultas];
         }
 
-        public Consulta FindByCpfAndDateAndTime(String cpf, DateTime data, TimeSpan horaInicio)
+        public Consulta? FindByCpfAndDateAndTime(String cpf, DateTime data, TimeSpan horaInicio)
         {
             var consulta = _context.Consultas.FirstOrDefault(c =>
                 c.Cliente.Cpf == cpf &&
                 c.DataConsulta == data &&
-                c.HoraInicial == horaInicio) ?? throw new Exception("consulta não encontrada!");
+                c.HoraInicial == horaInicio);
             return consulta;
         }
 

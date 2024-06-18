@@ -34,12 +34,12 @@ namespace OdontologicManagment.repository
 
         public Client? FindByCpf(string cpf)
         {
-            return _context.Clients.Single(client => client.Cpf == cpf);
+            return _context.Clients.SingleOrDefault(client => client.Cpf == cpf);
         }
 
         public Client? FindById(int id)
         {
-            return _context.Clients.Single(client => client.Id == id);
+            return _context.Clients.SingleOrDefault(client => client.Id == id);
         }
 
         public Client? DeleteByCpf(string cpf)
