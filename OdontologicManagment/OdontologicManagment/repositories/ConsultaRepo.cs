@@ -1,5 +1,4 @@
 ﻿using OdontologicManagment.models;
-using System.Globalization;
 
 namespace OdontologicManagment.repositories
 {
@@ -10,12 +9,22 @@ namespace OdontologicManagment.repositories
         public ConsultaRepo(ApplicationDbContext context)
         {
             _context = context;
+
+            _context.Database.EnsureDeleted();
+            _context.Database.EnsureCreated();
+            // Procura por clientes
+            if (_context.Clients.Any())
+            {
+                return;   //O BD foi alimentado
+            }
+
+            _context.SaveChanges();
         }
 
         public Consulta Save(Client client, String dia, String inicio, String termino)
         {
 
-            var novaConsulta = new Consulta(client,dia,inicio,termino);
+            var novaConsulta = new Consulta(client, dia, inicio, termino);
 
             _context.Consultas.Add(novaConsulta);
             _context.SaveChanges();
@@ -49,9 +58,15 @@ namespace OdontologicManagment.repositories
             return consulta;
         }
 
+        public List<Consulta> FindAllBetweenDate(DateTime inicio, DateTime final)
+        {
+            var consultas = _context.Consultas.Where(c => c.DataConsulta >= inicio && c.DataConsulta <= final);
+            return [.. consultas];
+        }
+
         public bool DeleteConsulta(Consulta consulta)
         {
-            if(_context.Consultas.Find(consulta) != null)
+            if (_context.Consultas.Find(consulta) != null)
             {
                 _context.Consultas.Remove(consulta);
                 _context.SaveChanges();

@@ -73,7 +73,7 @@ namespace OdontologicManagment.models
         }
 
         // construtor para mapeamento do EF core
-        private Consulta(Client cliente, DateTime dataConsulta, TimeSpan horaInicial, TimeSpan horaFinal) { }
+        public Consulta() { }
 
         private bool IsValidTime(TimeSpan time)
         {

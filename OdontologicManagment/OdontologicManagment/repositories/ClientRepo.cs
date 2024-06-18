@@ -8,7 +8,7 @@ namespace OdontologicManagment.repository
     public class ClientRepo
     {     
 
-        protected readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         public ClientRepo(ApplicationDbContext context)
         {

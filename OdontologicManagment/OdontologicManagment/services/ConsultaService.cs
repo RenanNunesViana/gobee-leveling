@@ -39,6 +39,16 @@ namespace OdontologicManagment.services
             return consultasFuturas;
         }
 
+        public List<Consulta> FindConsultasEntreDatas(DateTime inicio, DateTime termino)
+        {
+            return _consultaRepo.FindAllBetweenDate(inicio, termino);
+        }
+
+        internal List<Consulta> FindConsultas()
+        {
+            return _consultaRepo.FindAll();
+        }
+
         public bool CancelarConsulta(string cpf, string dataConsulta, string horaInicial)
         {
             if (!DateTime.TryParseExact(dataConsulta, "ddMMyyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDataConsulta))

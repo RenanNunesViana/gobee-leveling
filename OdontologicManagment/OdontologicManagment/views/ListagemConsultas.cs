@@ -1,5 +1,7 @@
-﻿using OdontologicManagment.models;
-using System.Collections.Generic;
+﻿using Google.Protobuf;
+using OdontologicManagment.models;
+using System.Globalization;
+using System;
 
 namespace OdontologicManagment.views
 {
@@ -28,7 +30,7 @@ namespace OdontologicManagment.views
                         }
 
                         String? dataFinal;
-                        Console.WriteLine($"Data Final: {dataFinal= Console.ReadLine()}");
+                        Console.WriteLine($"Data Final: {dataFinal = Console.ReadLine()}");
                         if (dataFinal == null)
                         {
                             Console.WriteLine("Por favor ensira uma data no formato dd/MM/yyyy");
@@ -49,7 +51,7 @@ namespace OdontologicManagment.views
 
             }
             while (entradaErrada);
-            
+
         }
 
         private static void RetornaConsultasTemplate(List<Consulta> consultas)
@@ -65,7 +67,17 @@ namespace OdontologicManagment.views
 
         private static List<Consulta> FiltrarConsultasPorData(List<Consulta> consultas, String dataInicial, String dataFinal)
         {
-            List<Consulta> consultasFiltradas = consultas.Where(c => c.DataConsulta.Date >= dataInicial && c.DataConsulta.Date <= dataFinal);//fazer a conversão das datas
+                if(!DateTime.TryParseExact(dataInicial, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDataInicial))
+            {
+                throw new Exception($"Utilize a data no formato dd/MM/yyyy");
+            }
+
+                if(DateTime.TryParseExact(dataFinal, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDataFinal))
+            {
+                throw new Exception($"Utilize a data no formato dd/MM/yyyy");
+            }
+            
+            List<Consulta> consultasFiltradas = consultas.Where(c => c.DataConsulta.Date >= parsedDataInicial && c.DataConsulta.Date <= parsedDataFinal).ToList();//fazer a conversão das datas
             return consultasFiltradas;
 
         }

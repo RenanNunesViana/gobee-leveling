@@ -86,6 +86,17 @@ namespace OdontologicManagment.services
             return consultasFuturas;
         }
 
+        //se ordenação for 0 é por cpf, se for 1 é por nome
+        public List<Client> RecuperaClientes(int ordenacao)
+        {
+            if (ordenacao == 0)
+            {
+                return _clientRepo.FindAll().OrderBy(c => c.Cpf).ToList();
+            }
+            else { return _clientRepo.FindAll().OrderBy(c => c.Name).ToList(); }
+
+        }
+
         private void LancaExcecaoCpfExistente(String cpf)
         {
             
