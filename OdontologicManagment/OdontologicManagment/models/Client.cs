@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using OdontologicManagment.utils;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
 
@@ -38,10 +39,7 @@ namespace OdontologicManagment.models
                 throw new ArgumentException("O nome do paciente deve ter pelo menos 5 caracteres");
             }
 
-            if (!DateTime.TryParseExact(birthDate, "ddMMyyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDate))
-            {
-                throw new ArgumentException("Data de nascimento inválida. Use o formato DDMMAAAA.");
-            }
+            var parsedDate = Utilities.FormataDataCliente(birthDate, "ddMMyyyy");
 
             var age = CalcularIdade(parsedDate);
             if (age < 13)

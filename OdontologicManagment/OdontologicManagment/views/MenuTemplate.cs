@@ -26,6 +26,7 @@ namespace OdontologicManagment.views
             }
 
             var opcao = Console.ReadKey();
+            Console.WriteLine("\n");
 
             if (char.IsDigit(opcao.KeyChar))
             {

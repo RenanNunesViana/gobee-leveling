@@ -1,7 +1,6 @@
-﻿using MySqlX.XDevAPI;
+﻿using OdontologicManagment.utils;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Globalization;
 
 namespace OdontologicManagment.models
 {
@@ -27,38 +26,31 @@ namespace OdontologicManagment.models
 
         public Consulta(Client cliente, String dataConsulta, String horaInicial, String horaFinal)
         {
-            if (!DateTime.TryParseExact(dataConsulta, "ddMMyyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDate))
-            {
-                throw new ArgumentException("Data de nascimento inválida. Use o formato DDMMAAAA.");
-            }
 
-            if (!TimeSpan.TryParseExact(horaInicial, "hhmm", CultureInfo.InvariantCulture, TimeSpanStyles.None, out var parsedHoraInicial))
-            {
-                throw new ArgumentException("Hora inicial inválida. Use o formato HHMM.");
-            }
 
-            if (!TimeSpan.TryParseExact(horaFinal, "hhmm", CultureInfo.InvariantCulture, TimeSpanStyles.None, out var parsedHoraFinal))
-            {
-                throw new ArgumentException("Hora final inválida. Use o formato HHMM.");
-            }
+            var dataFormatada = Utilities.FormataDataConsulta(dataConsulta, "ddMMyyyy");
 
-            if (parsedHoraFinal <= parsedHoraInicial)
+            var horaInicialFormatada = Utilities.FormataHoraConsulta(horaInicial, "hhmm");
+
+            var horaFinalFormatada = Utilities.FormataHoraConsulta(horaFinal, "hhmm");
+
+            if (horaFinalFormatada <= horaInicialFormatada)
             {
                 throw new ArgumentException("Hora final deve ser maior que a hora inicial.");
             }
 
-            if (!IsValidTime(parsedHoraInicial) || !IsValidTime(parsedHoraFinal))
+            if (!IsValidTime(horaInicialFormatada) || !IsValidTime(horaFinalFormatada))
             {
                 throw new ArgumentException("Horas devem estar em intervalos de 15 minutos.");
             }
 
-            if(!IsTempoValido(parsedHoraInicial, parsedHoraFinal))
+            if (!IsTempoValido(horaInicialFormatada, horaFinalFormatada))
             {
                 throw new ArgumentException("Horário de agendamento fora do horário de funcionamento (08:00 - 19:00).");
             }
 
             var now = DateTime.Now;
-            if (parsedDate < now.Date || (parsedDate == now.Date && parsedHoraInicial <= now.TimeOfDay))
+            if (dataFormatada < now.Date || (dataFormatada == now.Date && horaInicialFormatada <= now.TimeOfDay))
             {
                 throw new ArgumentException("A consulta deve ser agendada para um período futuro.");
             }
@@ -67,9 +59,9 @@ namespace OdontologicManagment.models
 
             Cliente = cliente;
             ClienteId = cliente.Id;
-            DataConsulta = parsedDate;
-            HoraInicial = parsedHoraInicial;
-            HoraFinal = parsedHoraFinal;
+            DataConsulta = dataFormatada;
+            HoraInicial = horaInicialFormatada;
+            HoraFinal = horaFinalFormatada;
         }
 
         // construtor para mapeamento do EF core
@@ -86,7 +78,7 @@ namespace OdontologicManagment.models
             var horaTermino = new TimeSpan(19, 0, 0);
 
             return horaInicial >= horaAbertura && horaFinal <= horaTermino;
-            
+
         }
 
     }

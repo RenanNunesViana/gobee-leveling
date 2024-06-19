@@ -1,5 +1,6 @@
 ﻿using OdontologicManagment.controllers;
 using OdontologicManagment.repositories;
+using OdontologicManagment.utils;
 
 internal class Program
 {

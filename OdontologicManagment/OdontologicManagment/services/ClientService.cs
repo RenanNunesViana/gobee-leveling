@@ -47,7 +47,6 @@ namespace OdontologicManagment.services
             {
                 LancaExcecaoCpfExistente(client.Cpf);
                 _clientRepo.Save(client);
-                Console.WriteLine("Cliente adicionado com sucesso.");
             }
             else
             {

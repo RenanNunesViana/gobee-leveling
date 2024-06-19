@@ -36,6 +36,7 @@ namespace OdontologicManagment.controllers
             {
                 Console.WriteLine(ex.Message);
             }
+            Console.WriteLine("\n");
         }
 
         public void DeleteClient()
@@ -48,6 +49,7 @@ namespace OdontologicManagment.controllers
                 Console.WriteLine("Paciente excluído com sucesso!");
             }
             catch (Exception ex) {Console.WriteLine(ex.Message);}
+            Console.WriteLine("\n");
         }
 
         public void recuperaClientById(int id)
@@ -60,6 +62,7 @@ namespace OdontologicManagment.controllers
         {
             var clientes = clientService.RecuperaClientes(ordenacao);
             ListagemClientes.Run(clientes);
+            Console.WriteLine("\n");
         }
     }
 }

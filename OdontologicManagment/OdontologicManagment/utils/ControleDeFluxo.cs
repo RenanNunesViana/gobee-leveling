@@ -1,11 +1,12 @@
-﻿using OdontologicManagment.views;
+﻿using OdontologicManagment.controllers;
+using OdontologicManagment.views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OdontologicManagment.controllers
+namespace OdontologicManagment.utils
 {
     public class ControleDeFluxo()
     {

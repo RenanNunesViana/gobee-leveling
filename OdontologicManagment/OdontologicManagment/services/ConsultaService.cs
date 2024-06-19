@@ -1,6 +1,7 @@
 ﻿using OdontologicManagment.models;
 using OdontologicManagment.repositories;
 using OdontologicManagment.repository;
+using OdontologicManagment.utils;
 using System.Globalization;
 
 namespace OdontologicManagment.services
@@ -51,17 +52,11 @@ namespace OdontologicManagment.services
 
         public bool CancelarConsulta(string cpf, string dataConsulta, string horaInicial)
         {
-            if (!DateTime.TryParseExact(dataConsulta, "ddMMyyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDataConsulta))
-            {
-                throw new ArgumentException("Data de consulta inválida. Use o formato DDMMAAAA.");
-            }
+            var dataFormatada = Utilities.FormataDataConsulta(dataConsulta, "ddMMyyyy");
 
-            if (!TimeSpan.TryParseExact(horaInicial, "hhmm", CultureInfo.InvariantCulture, out var parsedHoraInicial))
-            {
-                throw new ArgumentException("Hora inicial inválida. Use o formato HHMM.");
-            }
+            var horaFormatada = Utilities.FormataHoraConsulta(horaInicial, "hhmm");
 
-            var consulta = _consultaRepo.FindByCpfAndDateAndTime(cpf, parsedDataConsulta, parsedHoraInicial) ?? throw new Exception("Erro: agendamento não encontrado");
+            var consulta = _consultaRepo.FindByCpfAndDateAndTime(cpf, dataFormatada, horaFormatada) ?? throw new Exception("Erro: agendamento não encontrado");
 
             var now = DateTime.Now;
             if (consulta.DataConsulta < now.Date || (consulta.DataConsulta == now.Date && consulta.HoraInicial <= now.TimeOfDay))

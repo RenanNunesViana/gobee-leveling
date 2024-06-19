@@ -64,6 +64,7 @@ namespace OdontologicManagment.views
             {
                 Console.WriteLine($"{consulta.DataConsulta.Date} {consulta.HoraInicial} {consulta.HoraFinal} {consulta.HoraFinal - consulta.HoraInicial} {consulta.Cliente.Name} {consulta.Cliente.BirthDate.Date}");
             }
+            Console.WriteLine("-------------------------------------------------------------");
         }
 
         private static List<Consulta> FiltrarConsultasPorData(List<Consulta> consultas, String dataInicial, String dataFinal)

@@ -50,6 +50,7 @@ namespace OdontologicManagment.controllers
                 var consultas = consultaService.FindConsultas();
                 ListagemConsultas.Run(consultas);
             } catch (Exception ex) { Console.WriteLine(ex.Message); };
+            Console.WriteLine("\n");
         }
 
         public void AgendamentoConsulta()
@@ -57,11 +58,12 @@ namespace OdontologicManagment.controllers
             try
             {
                 RegistrarConsulta.Run(out string? cpf, out string? data, out string? inicio, out string? termino);
-                var dataFormatada = data.Replace("/", "");
+                var dataFormatada = data?.Replace("/", "");
                 consultaService.AgendarConsulta(cpf, dataFormatada, inicio, termino);
                 Console.WriteLine("Agendamento realizado com sucesso!");
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
+            Console.WriteLine("\n");
         }
 
         public void CancelamentoConsulta()
@@ -81,7 +83,7 @@ namespace OdontologicManagment.controllers
                 Console.WriteLine("Agendamento cancelado com sucesso!");
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
-            
+            Console.WriteLine("\n");
         }
     }
 }
