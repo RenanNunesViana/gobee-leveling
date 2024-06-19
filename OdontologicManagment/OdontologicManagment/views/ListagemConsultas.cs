@@ -1,7 +1,5 @@
-﻿using Google.Protobuf;
-using OdontologicManagment.models;
-using System.Globalization;
-using System;
+﻿using OdontologicManagment.models;
+using OdontologicManagment.utils;
 
 namespace OdontologicManagment.views
 {
@@ -57,29 +55,23 @@ namespace OdontologicManagment.views
 
         private static void RetornaConsultasTemplate(List<Consulta> consultas)
         {
-            Console.WriteLine("-------------------------------------------------------------");
-            Console.WriteLine("   Data    H.Ini    H.Fim    Tempo   Nome           Dt.Nasc. ");
-            Console.WriteLine("-------------------------------------------------------------");
+            Console.WriteLine("----------------------------------------------------------------------------------------------------");
+            Console.WriteLine("   Data          H.Ini             H.Fim             Tempo              Nome               Dt.Nasc. ");
+            Console.WriteLine("----------------------------------------------------------------------------------------------------");
             foreach (var consulta in consultas)
             {
-                Console.WriteLine($"{consulta.DataConsulta.Date} {consulta.HoraInicial} {consulta.HoraFinal} {consulta.HoraFinal - consulta.HoraInicial} {consulta.Cliente.Name} {consulta.Cliente.BirthDate.Date}");
+                Console.WriteLine($"{consulta.DataConsulta.Date.ToString("dd/MM/yyyy")} {consulta.HoraInicial.ToString(@"hh\:mm").PadLeft(11)} {consulta.HoraFinal.ToString(@"hh\:mm").PadLeft(17)} {(consulta.HoraFinal - consulta.HoraInicial).ToString(@"hh\:mm").PadLeft(17)} {consulta.Cliente.Name.PadLeft(18)} {consulta.Cliente.BirthDate.Date.ToString("dd/MM/yyyy").PadLeft(22)}");
             }
-            Console.WriteLine("-------------------------------------------------------------");
+            Console.WriteLine("----------------------------------------------------------------------------------------------------");
         }
 
         private static List<Consulta> FiltrarConsultasPorData(List<Consulta> consultas, String dataInicial, String dataFinal)
         {
-                if(!DateTime.TryParseExact(dataInicial, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDataInicial))
-            {
-                throw new Exception($"Utilize a data no formato dd/MM/yyyy");
-            }
+            var dataInicialFormatada = Utilities.FormataDataConsulta(dataInicial, "ddMMyyyy");
 
-                if(!DateTime.TryParseExact(dataFinal, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDataFinal))
-            {
-                throw new Exception($"Utilize a data no formato dd/MM/yyyy");
-            }
-            
-            List<Consulta> consultasFiltradas = consultas.Where(c => c.DataConsulta.Date >= parsedDataInicial && c.DataConsulta.Date <= parsedDataFinal).ToList();//fazer a conversão das datas
+            var dataFinalFormatada = Utilities.FormataDataConsulta(dataFinal, "ddMMyyyy");
+
+            List<Consulta> consultasFiltradas = consultas.Where(c => c.DataConsulta.Date >= dataInicialFormatada && c.DataConsulta.Date <= dataFinalFormatada).ToList();
             return consultasFiltradas;
 
         }

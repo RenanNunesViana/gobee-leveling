@@ -16,7 +16,7 @@ namespace OdontologicManagment.repositories
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var conectionString = "Server=localhost;Port=3306;Database=dbclientes;Uid=root;Pwd=060263;";
+                var conectionString = $"Server=localhost;Port=3306;Database=dbclientes;Uid=root;Pwd={Environment.GetEnvironmentVariable("MYSQL_PASSWORD")}";
                 optionsBuilder.UseMySql(conectionString, ServerVersion.AutoDetect(conectionString));
             }
         }
